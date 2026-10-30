@@ -38,4 +38,4 @@ se conservaron del proyecto que estás usando actualmente.
 La entrega conserva el código Kotlin y los recursos del proyecto de trabajo.
 No se volvió a compilar ni a ejecutar durante la reorganización de commits.
 La verificación de compilación previa está descrita en `VERIFICACION.md`.
-Este repositorio todavía no está publicado en GitHub y no tiene remoto configurado.
+Repositorio de destino: https://github.com/NICO-bestacclaimed/Laboratorio11-Firebase

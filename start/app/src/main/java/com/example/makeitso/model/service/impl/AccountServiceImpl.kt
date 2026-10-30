@@ -18,6 +18,7 @@ package com.example.makeitso.model.service.impl
 
 import com.example.makeitso.model.User
 import com.example.makeitso.model.service.AccountService
+import com.example.makeitso.model.service.trace
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
@@ -57,9 +58,11 @@ class AccountServiceImpl @Inject constructor(private val auth: FirebaseAuth) : A
   }
 
   override suspend fun linkAccount(email: String, password: String) {
-    val user = checkNotNull(auth.currentUser) { "No hay una sesión activa" }
-    val credential = EmailAuthProvider.getCredential(email, password)
-    user.linkWithCredential(credential).await()
+    trace(LINK_ACCOUNT_TRACE) {
+      val user = checkNotNull(auth.currentUser) { "No hay una sesión activa" }
+      val credential = EmailAuthProvider.getCredential(email, password)
+      user.linkWithCredential(credential).await()
+    }
   }
 
   override suspend fun deleteAccount() {
@@ -76,4 +79,7 @@ class AccountServiceImpl @Inject constructor(private val auth: FirebaseAuth) : A
     createAnonymousAccount()
   }
 
+  companion object {
+    private const val LINK_ACCOUNT_TRACE = "linkAccount"
+  }
 }

@@ -80,3 +80,10 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+# Firebase configuration belongs to the local project
+google-services.json
+.DS_Store
+
+# Archivos locales del IDE
+.idea/

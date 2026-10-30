@@ -39,7 +39,7 @@ class TasksViewModel @Inject constructor(
   val tasks = storageService.tasks
 
   fun loadTaskOptions() {
-    options.value = TaskActionOption.getOptions(true)
+    options.value = TaskActionOption.getOptions(configurationService.isShowTaskEditButtonConfig)
   }
 
   fun onTaskCheckChange(task: Task) {

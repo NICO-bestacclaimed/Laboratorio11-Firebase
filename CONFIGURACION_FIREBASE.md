@@ -11,3 +11,7 @@ Estas acciones se realizan en la consola y no se aplican automáticamente al clo
 Crear la base de datos en modo de producción y seleccionar su ubicación.
 Las tareas se almacenan como documentos de la colección `tasks`.
 Cada documento contiene el campo `userId` del propietario autenticado.
+
+## Punto 4: reglas de seguridad
+Copiar el contenido de `firestore.rules` en la pestaña Reglas de Firestore
+y publicarlo. Incluir el archivo en Git no publica las reglas en Firebase.

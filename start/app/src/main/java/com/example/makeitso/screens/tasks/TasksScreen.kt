@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.makeitso.R.drawable as AppIcon
 import com.example.makeitso.R.string as AppText
 import com.example.makeitso.common.composable.ActionToolbar
@@ -42,7 +43,11 @@ fun TasksScreen(
   openScreen: (String) -> Unit,
   viewModel: TasksViewModel = hiltViewModel()
 ) {
+  val tasks by viewModel.tasks.collectAsStateWithLifecycle(emptyList())
+  val options by viewModel.options
   TasksScreenContent(
+    tasks = tasks,
+    options = options,
     onAddClick = viewModel::onAddClick,
     onSettingsClick = viewModel::onSettingsClick,
     onTaskCheckChange = viewModel::onTaskCheckChange,
@@ -58,6 +63,8 @@ fun TasksScreen(
 @ExperimentalMaterialApi
 fun TasksScreenContent(
   modifier: Modifier = Modifier,
+  tasks: List<Task> = emptyList(),
+  options: List<String> = emptyList(),
   onAddClick: ((String) -> Unit) -> Unit,
   onSettingsClick: ((String) -> Unit) -> Unit,
   onTaskCheckChange: (Task) -> Unit,
@@ -87,10 +94,10 @@ fun TasksScreenContent(
       Spacer(modifier = Modifier.smallSpacer())
 
       LazyColumn {
-        items(emptyList<Task>(), key = { it.id }) { taskItem ->
+        items(tasks, key = { it.id }) { taskItem ->
           TaskItem(
             task = taskItem,
-            options = listOf(),
+            options = options,
             onCheckChange = { onTaskCheckChange(taskItem) },
             onActionClick = { action -> onTaskActionClick(openScreen, taskItem, action) }
           )
